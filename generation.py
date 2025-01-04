@@ -245,11 +245,18 @@ if __name__ == "__main__":
 
     if option == "Ad-generation by Manually Entering Data":
         st.subheader("Manual Data Entry")
+        # Define options for the dropdown
+        product_list = ["Home", "Personal", "Jewel","Car"]
+        gender_list=["Male", "Female"]
+
+# Create the dropdown
+        
         age = st.text_input("Age")
-        gender = st.text_input("Gender")
+        gender = st.selectbox("Select your gender:", gender_list, index=1)
         profession = st.text_input("Profession")
         location = st.text_input("Location")
-        product = st.text_input("Product")
+        # product = st.text_input("Product")
+        product = st.selectbox("Select a Product:", product_list, index=1)
         income=0
 
         if st.button("Generate Image"):
