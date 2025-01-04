@@ -243,7 +243,7 @@ if __name__ == "__main__":
         ("Ad-generation by Manually Entering Data", "Ad-generation by Uploading CSV File")
     )
 
-    if option == "Manually Enter Data":
+    if option == "Ad-generation by Manually Entering Data":
         st.subheader("Manual Data Entry")
         age = st.text_input("Age")
         gender = st.text_input("Gender")
@@ -277,7 +277,7 @@ if __name__ == "__main__":
             else:
                 st.error("Please fill all fields to generate an image.")
 
-    elif option == "Upload CSV File":
+    elif option == "Ad-generation by Uploading CSV File":
         st.subheader("Personalized Ad generation from CSV")
         uploaded_file = st.file_uploader("Upload a CSV file", type=["csv"])
 
@@ -347,7 +347,6 @@ if __name__ == "__main__":
     #     # image = Image.open("input_image1.jpg")
 
         
-
 
 
 
