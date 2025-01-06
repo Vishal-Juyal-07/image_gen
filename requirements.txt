@@ -6,3 +6,4 @@ google
 pandas
 streamlit
 python-dotenv
+face-recognition
