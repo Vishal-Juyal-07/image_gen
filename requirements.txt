@@ -7,5 +7,4 @@ pandas
 streamlit
 python-dotenv
 face-recognition
-CMake
 dlib
