@@ -170,21 +170,21 @@ def save_genimage(product, age, location, gender, profession):
     # gender = input('\nEnter your gender details: ')
     # profession = input('\nEnter your profession details: ')
  
-    if product == 'jewel':
+    if product.lower() == 'jewel':
         product = 'jewellery'
-    elif product == 'personal':
+    elif product.lower() == 'personal':
         product = 'vacation'
  
     user_prompt = f'{product} pitched to {age} year old Indian customer'
    
     system_prompt = f"A photo taken with an iPhone 16 Pro Max showcasing a loan marketing ad featuring a {age}-year-old {gender} {profession} professional in {location}, India.\
-    The {product} (No logo) is positioned in the foreground, fully in focus, and beside the person and no text visible in the image."
+    The {product} (blank logo) is positioned in the foreground, fully in focus, and beside the person and no text visible in the image."
     system_prompt = system_prompt.replace('  ', ' ')
     system_prompt = system_prompt.replace('  ', ' ')
     print(system_prompt)
  
     # output is a PIL.Image object
-    client = InferenceClient("black-forest-labs/FLUX.1-dev", token='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')
+    client = InferenceClient("black-forest-labs/FLUX.1-dev", token=HF_TOKEN)
  
     image = client.text_to_image(system_prompt)
  
@@ -460,12 +460,14 @@ if __name__ == "__main__":
                 st.write(data.head())
 
                 if st.button("Generate Images from CSV"):
+                    count = 0
                     # Ensure required columns are present
                     required_columns = ['Age', 'Gender', 'Profession', 'Location', 'Product']
                     if all(col in data.columns for col in required_columns):
                         # Pick 5 random rows
                         sampled_data = data.sample(5)
                         for idx, row in sampled_data.iterrows():
+                            count +=1
                             with st.spinner("Processing... Please wait while the image is being generated."):                    
                                 img = generate_image_with_timeout(row['Product'],row['Age'], row['Location'], row['Gender'],row['Profession'], timeout=240)
                             if img:
@@ -481,7 +483,7 @@ if __name__ == "__main__":
 
                                 image.save(output_path)
                                 print(f"Image saved as {output_path}")
-                                st.image(image, caption="Generated Image", use_container_width=True)
+                                st.image(image, caption=f"Generated Image: {count}", use_container_width=True)
                             else:
                                 st.error("Model too busy, unable to get response in less than 240 second(s).")
                             # st.image(img, caption="Generated Image", use_container_width=True)
