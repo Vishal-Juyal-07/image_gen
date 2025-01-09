@@ -6,5 +6,5 @@ google
 pandas
 streamlit
 python-dotenv
-face-recognition
-dlib
+face_recognition@git+https://github.com/Vishal-Juyal-07/face_recognition
+dlib-bin
